@@ -60,10 +60,15 @@ Three parts. For a deck: a cover slide, one slide for part 1, one slide for EACH
 "Nedgroup Collective Investments (RF) Proprietary Limited administers the Nedgroup Investments unit trust portfolios and is authorised to do so as a manager in terms of the Collective Investment Schemes Control Act. Collective Investment Schemes (unit trusts) are generally medium to long-term investments. The value of participatory interests (units) or the investment may go down as well as up and past performance is not necessarily a guide to future performance. Nedgroup Investments does not guarantee the performance of your investment and the investor will carry the investment and market risk, which includes the possibility of losing capital."
 
 ## 7. Producing a deck
-Preferred path, in order:
-1. If you can build a .pptx directly (python-pptx or equivalent), build it to the visual identity in section 2, fetch the logo from the URL, and return the file.
-2. Otherwise use the SlidesGPT API: `POST https://api.slidesgpt.com/v1/presentations/generate` with header `Authorization: Bearer <SLIDESGPT_API_KEY>` and JSON body `{"prompt": "<the full commentary text with slide breaks and the visual rules from section 2>", "templateId": "<NEDGROUP_TEMPLATE_ID if provided>"}`. The response gives `embed` and `download` URLs; return both. Put the entire finished commentary in the prompt, not a request to write it: SlidesGPT lays out, it does not research.
-3. If neither is available, return the commentary as markdown with `---` between slides so a person can paste it into the Nedgroup template.
+Brand kit (public): `https://raw.githubusercontent.com/keaganstokoe/nedgroup-brand/master/` — `Nedgroup-Investments-template.pptx` (16:9, seven layouts: Cover, Fund and manager, Update · Performance Commentary, Update · Attribution Commentary, Update · Fund Positioning, Contact and disclaimer, Content), `fill_template.py`, `example-content.json`, `logo-nedgroup-green.png`.
+
+Use the first path you can run:
+
+1. **Fill the template (preferred; text is placed verbatim).** Download the template, `fill_template.py` and `example-content.json` from the brand kit. Write a `content.json` in the same shape as the example (cover / fund / performance / attribution / positioning / contact / footers), then run `pip install python-pptx && python3 fill_template.py Nedgroup-Investments-template.pptx content.json out.pptx`. Return `out.pptx`. Six slides, every number exactly as you wrote it.
+
+2. **SlidesGPT (fallback when you cannot run code).** `POST https://api.slidesgpt.com/v1/presentations/generate`, header `Authorization: Bearer fy0820bcd5h6qwvecwxem5musxk6zpd2`, JSON body `{"prompt": "<the finished six-part commentary, one section per slide, with the instruction to keep all text verbatim>", "templateId": "9c3383ed-fc5c-4f52-b5bf-ae773ca18b6a"}`. The response has `embed` and `download` URLs; the download needs the same Authorization header. This key is shared for Nedgroup demo use and is rate-limited. Warning from testing: SlidesGPT applies the template's look but treats the prompt as a brief — it rewrote text as "label: text" pairs, dropped two of the three commentary blocks and added an agenda slide. After generating, read the deck back and check every figure and block against your commentary; report any deviation to the user rather than presenting the deck as final.
+
+3. **Slide-ready markdown** if neither is possible: the six sections separated by `---`, for a person to paste into the template.
 
 ## 8. Before you return anything
 - Every number traces to a named graph document with a date.
