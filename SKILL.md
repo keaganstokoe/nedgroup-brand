@@ -12,17 +12,20 @@ Load this skill before producing ANY content for Nedgroup Investments: monthly o
 ## 2. Visual identity
 | Role | Hex | Use |
 |---|---|---|
-| Ink | #212121 | body text, headings |
-| Bright green | #00E677 | accents, rules/dividers, key numbers, sparingly |
-| Deep green | #006341 | logo colour, section banners, emphasis blocks |
-| Mint | #B3DFD1 | subtle fills, table row shading |
-| Mid grey | #9E9E9E | captions, footnotes, sources |
-| Paper | #FFFFFF | all backgrounds; layouts light and airy |
+| Paper | #FBFAF7 | background of every content page and slide |
+| Ink | #16211C | body text |
+| Green | #0B5138 | section labels, rules, block headings, key numbers |
+| Deep green | #0A3D2B | cover background (white text on it); emphasis bands |
+| Mint | #C3DDD0 | subtle fills, secondary bars |
+| Muted | #5D6B63 | secondary text, captions |
+| Grey | #8B968F | footers, source lines |
 
-- Typeface: **Arial** everywhere. Headings Arial bold in ink or deep green. Body 10–12pt, left-aligned, never justified.
-- Section labels in ALL CAPS are part of the grammar: "MONTHLY PORTFOLIO UPDATE", "QUARTERLY PORTFOLIO UPDATE".
-- Logo: `https://raw.githubusercontent.com/keaganstokoe/nedgroup-brand/master/logo-nedgroup-green.png` (official stacked logo, deep green, PNG). Place top-left of the cover and every content page. Never recolour, stretch, crop or put it on a coloured background. No partner logos or headshots in this version.
-- Decks: 16:9, white background, deep-green section banner across the top of content slides, bright green only for data highlights and dividers. Footer on every slide: "Source: Nedgroup Investments, <as-at date>".
+- Two typefaces. **Georgia** (serif) for titles, headlines, block headings and large numbers. **Arial** for everything else, 12–13pt body, left-aligned, never justified.
+- Section labels in ALL CAPS, Arial 10pt, letter-spaced, green: "QUARTERLY PORTFOLIO UPDATE", "FUND AND MANAGER", "CONTACT".
+- Layouts are light and airy: thin rules, generous white space, no boxes with heavy borders, no icons, no clip art, no stock photos, no gradients.
+- The tagline "see money differently" in Georgia italic, bottom-right of the cover and on the contact page.
+- Logo: `https://raw.githubusercontent.com/keaganstokoe/nedgroup-brand/master/logo-nedgroup-green.png` (official stacked logo, deep green, PNG). Top-right of the cover on a small white plate; top-left of the contact page. Never recolour, stretch or crop. No partner logos or headshots in this version.
+- Every content slide carries a footer in grey 8pt: fund name in caps on the left, "Source: Nedgroup Investments, <document>, <date>" on the right.
 
 ## 3. Voice
 - Plain-English institutional. Confident, measured, client-respectful. No hype words (thrilled, excited, incredible, exciting), no exclamation marks.
