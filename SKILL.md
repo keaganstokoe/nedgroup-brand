@@ -59,24 +59,72 @@ Three parts. For a deck: a cover slide, one slide for part 1, one slide for EACH
 ## 6. Standard disclaimer (client-facing material; copy verbatim)
 "Nedgroup Collective Investments (RF) Proprietary Limited administers the Nedgroup Investments unit trust portfolios and is authorised to do so as a manager in terms of the Collective Investment Schemes Control Act. Collective Investment Schemes (unit trusts) are generally medium to long-term investments. The value of participatory interests (units) or the investment may go down as well as up and past performance is not necessarily a guide to future performance. Nedgroup Investments does not guarantee the performance of your investment and the investor will carry the investment and market risk, which includes the possibility of losing capital."
 
-## 7. Producing a deck
-Brand kit (public): `https://raw.githubusercontent.com/keaganstokoe/nedgroup-brand/master/` — `Nedgroup-Investments-template.pptx` (16:9, seven layouts: Cover, Fund and manager, Update · Performance Commentary, Update · Attribution Commentary, Update · Fund Positioning, Contact and disclaimer, Content), `fill_template.py`, `example-content.json`, `logo-nedgroup-green.png`.
+## 7. Output format for decks
+Do not call any presentation-generation service or tool. Produce the deck as a **complete, self-contained brief in markdown** that a person can paste into Microsoft Copilot (or open in PowerPoint) to build the slides. The brief must carry everything the slide builder needs, so include the design rules inline, not by reference.
 
-Use the first path you can run:
+Structure the brief exactly like this:
 
-1. **Fill the template (preferred; text is placed verbatim).** Download the template, `fill_template.py` and `example-content.json` from the brand kit. Write a `content.json` in the same shape as the example (cover / fund / performance / attribution / positioning / contact / footers), then run `pip install python-pptx && python3 fill_template.py Nedgroup-Investments-template.pptx content.json out.pptx`. Return `out.pptx`. Six slides, every number exactly as you wrote it.
+```
+# <Fund name> — <Quarterly|Monthly> commentary — <period>
 
-2. **SlidesGPT REST API (fallback when you cannot run code).** Do NOT use a SlidesGPT MCP tool, connector or "slidesgpt.com/claude" integration even if one is available to you: those ignore the Nedgroup template and produce SlidesGPT's default theme with blue icons. Call the REST endpoint yourself with an HTTP request:
-   `POST https://api.slidesgpt.com/v1/presentations/generate`
-   headers: `Authorization: Bearer fy0820bcd5h6qwvecwxem5musxk6zpd2`, `Content-Type: application/json`
-   body: `{"prompt": "<the finished six-part commentary, one section per slide, with the instruction to keep all text verbatim and use no icons>", "templateId": "9c3383ed-fc5c-4f52-b5bf-ae773ca18b6a"}`
-   The response has `embed` and `download` URLs; the download needs the same Authorization header. If the URL you end up with does not start with `api.slidesgpt.com`, the template was not applied; do it again via the REST endpoint. This key is shared for Nedgroup demo use and is rate-limited. Even with the template, SlidesGPT applies only the theme (green palette, Georgia and Arial) and lays slides out its own way; it may rewrite text into "label: text" pairs or drop a block. After generating, read the deck back and check every figure and block against your commentary; report any deviation to the user rather than presenting the deck as final.
+## Design instructions (apply to every slide)
+- 16:9. Background: warm off-white #FBFAF7. Body text: ink #16211C, Arial 12–13pt, left-aligned, never justified.
+- Headings and large numbers: Georgia (serif). Section labels in ALL CAPS, Arial 10pt, letter-spaced, deep green #0B5138.
+- Deep green #0A3D2B as the full background of the cover slide only, with white text. Green #0B5138 for section labels and a thin rule under the header of every content slide.
+- Logo: https://raw.githubusercontent.com/keaganstokoe/nedgroup-brand/master/logo-nedgroup-green.png — top-right of the cover (on a small white plate) and top-left of the contact slide. Never recolour or stretch.
+- No icons, no clip art, no stock photos, no gradients, no bullet-point icons. No exclamation marks.
+- Footer on every content slide, Arial 8pt grey #8B968F: left "<FUND NAME IN CAPS>", right "Source: Nedgroup Investments, <source document>, <date>".
+- Six slides, in the order below. Keep all text exactly as written; do not summarise, shorten or reword.
 
-3. **Slide-ready markdown** if neither is possible: the six sections separated by `---`, for a person to paste into the template.
+---
+## Slide 1 — Cover (deep green background, white text)
+Eyebrow (top-left, small caps): QUARTERLY COMMENTARY · <period>
+Title (Georgia, very large): <Fund short name, e.g. Flexible Income Fund>
+Subtitle: Nedgroup Investments · Managed by <manager> since <year>
+Stat band (four columns, thin white rules between; big Georgia number, small caps label, small sub-line):
+  <3.0%> | Q2 RETURN | Benchmark <1.8%>
+  <9.8%> | 12 MONTHS | Benchmark <7.0%>
+  <R17.0bn> | FUND SIZE | <date>
+  <fourth stat> | <LABEL> | <sub-line>
+Bottom-left, small caps: <ASISA CATEGORY>. Bottom-right, Georgia italic: see money differently
+
+---
+## Slide 2 — Fund and manager
+Section label: FUND AND MANAGER          Period (top-right): <period>
+Headline (Georgia): <one-line market headline>
+Left column — INVESTMENT APPROACH: three short lines. PORTFOLIO MANAGERS: <names, firm>.
+Right column — Market context: <120–180 words>
+
+---
+## Slide 3 — Performance Commentary
+Section label: QUARTERLY PORTFOLIO UPDATE          Period: <period>
+Performance strip (three boxes in a row, white with thin grey border): 
+  PERFORMANCE TO <date> / <class>, net of fees, versus <benchmark in full>
+  3 months · Fund <x%> / 3 months · Benchmark <y%>
+  12 months · Fund <x%> / 12 months · Benchmark <y%>
+Left: small "01" in grey, then block heading (Georgia, green): Performance Commentary
+Right: <80–160 words>
+
+---
+## Slide 4 — Attribution Commentary
+Same layout as slide 3 with "02" and heading Attribution Commentary. Right: <80–160 words>
+
+---
+## Slide 5 — Fund Positioning
+Same layout as slide 3 with "03" and heading Fund Positioning. Right: <80–160 words>
+
+---
+## Slide 6 — Contact and disclaimer
+Section label: CONTACT
+Left: logo; heading (Georgia): For more information; www.nedgroupinvestments.com; 0800 123 263 (RSA only) · +27 21 412 2003; clientservices@nedgroupinvestments.co.za; Georgia italic in green: see money differently
+Right column, Arial 9.5pt grey: <the verbatim disclaimer from section 6>
+```
+
+Return the whole brief as your output, nothing else before it. A worked example of a finished brief is at https://raw.githubusercontent.com/keaganstokoe/nedgroup-brand/master/example-brief.md.
 
 ## 8. Before you return anything
 - Every number traces to a named graph document with a date.
 - Benchmark named in full on first use; all returns relative.
 - Disclaimer present and verbatim in client-facing output.
-- No hype words, no exclamation marks, Arial, palette above, logo untouched.
+- No hype words, no exclamation marks; design instructions included inline in the brief; logo untouched.
 - Latest period stated explicitly; no invented months.
